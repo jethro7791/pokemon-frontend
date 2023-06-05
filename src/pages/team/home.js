@@ -20,22 +20,6 @@ const Home = () => {
                 </Link>
             </button>
         </div>
-      {/* <h1>Home Page</h1>
-      <br />
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/create">Create</Link>
-        </li>
-        <li>
-          <Link to="/:id/edit">Edit</Link>
-        </li>
-        <li>
-          <Link to="/list">List</Link>
-        </li>
-      </ul> */}
     </div>
   );
 };

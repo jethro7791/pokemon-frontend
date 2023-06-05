@@ -15,7 +15,7 @@ module.exports = {
       },
       content: {
         //png
-        //'goback': 'url("public/images/GoBack.png")',
+        'goback': 'url("../images/GoBack.png")',
       }
     },
   },
