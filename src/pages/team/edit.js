@@ -2,9 +2,12 @@ import React from "react";
 import {useEffect, useState} from 'react';
 import css from '../../css/globals.css';
 import pokemonService from '../../service/pokemon.service';
+import { useNavigate  } from "react-router-dom";
+
 import {
     generatePath,
     useHistory,
+    useLocation,
     useParams
   } from "react-router-dom";
 async function getPokemonData(url) {
@@ -57,12 +60,15 @@ export async function savePokemon(result){
         console.log(e);
     });
 }
-const PokemonList = () =>{
+const PokemonEdit = () =>{
     const [err, setErr] = useState([]);
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [teamname, setTeamname] = useState('');
-    const { id } = useParams();
+    const [id, setId] = useState();
+    const { idP } = useParams();
+    const location = useLocation()
+    const navigate = useNavigate();
 
     useEffect(() => {
         // declare the data fetching function
@@ -70,7 +76,10 @@ const PokemonList = () =>{
         const fetchData = async () => {
 
             try {
-                const result = await pokemonService.get(id);
+              console.log('***++++++++++++++',location.pathname);
+              const firstPath = location.pathname.split('/')[1];
+              console.log('firstPath',firstPath);
+                const result = await pokemonService.get(location.pathname.split('/')[1]);
                 const { data } = await result;
                 console.log('data',data)
                 setData(data);
@@ -120,7 +129,7 @@ const PokemonList = () =>{
     }
       return (
         <div>
-          {/* <div className='content-goback w-28'  onClick={() => router.back()}></div> */}
+          <div className='content-goback w-40 pl-16 pt-3'  onClick={() => navigate('/list')}></div>
     
           <div className='p-16 font-roboto text-3xl'>
             {err && <h2>{err}</h2>}
@@ -133,7 +142,7 @@ const PokemonList = () =>{
             </div>
             {data.map(pokemon => {
               return (
-                <div key={pokemon.rowid} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-5 h-[200px] mb-2' >                       
+                <div key={pokemon.id} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-5 h-[200px] mb-2' >                       
                     <div className="flex justify-between px-8">
                         <div className="flex justify-start">
                             <img className='w-32' src={pokemon.image} />
@@ -164,4 +173,4 @@ const PokemonList = () =>{
       );
 }
 
-export default PokemonList;
+export default PokemonEdit;

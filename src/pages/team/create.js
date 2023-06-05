@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from 'react';
 import css from '../../css/globals.css';
-// import { useRouter } from 'next/router'
+import { useNavigate  } from "react-router-dom";
 import pokemonService from '../../service/pokemon.service';
 
   
@@ -51,7 +51,7 @@ const PokemonSel = () => {
     const [teamname, setTeamname] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [err, setErr] = useState('');
-
+    const navigate = useNavigate();
 //   const router = useRouter()
 
     const handleClick = async () => {
@@ -99,7 +99,7 @@ const PokemonSel = () => {
 
   return (
     <div>
-      {/* <div className='content-goback w-28'  onClick={() => router.back()}></div> */}
+      <div className='content-goback w-40 pl-16 pt-3' onClick={() => navigate('/')}></div>
 
       <div className='p-16 font-roboto text-3xl'>
         {err && <h2>{err}</h2>}
