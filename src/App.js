@@ -5,7 +5,7 @@ import Home from './pages/team/home';
 import Edit from './pages/team/edit';
 import Create from './pages/team/create';
 import List from './pages/team/list';
-import styles from "./index.css"
+import styles from "./css/globals.css"
 export default function App() {
   return (
     <div className="App">

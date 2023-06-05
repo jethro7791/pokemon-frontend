@@ -19,7 +19,6 @@ const PokemonList = () =>{
             try {
                 const result = await pokemonService.getAll();
                 const { data } = await result;
-                console.log('data',data)
                 setData(data);
               } catch (err) {
                 setErr(err.message);
@@ -58,14 +57,8 @@ const PokemonList = () =>{
       }, [])
     
       const onUpdate = (i) =>{
-        window.location.href = '/'+i+'/edit'
-        // pokemonService.get(i)
-        // .then(response => {
-        //   console.log(response.data);
-        // })
-        // .catch(e => {
-        //   console.log(e);
-        // });
+        //window.location.href = '/'+i+'/edit'
+        navigate('/'+i+'/edit')
       }
 
       const onChangeFilter = (e) =>{

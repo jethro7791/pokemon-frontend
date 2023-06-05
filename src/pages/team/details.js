@@ -16,7 +16,6 @@ const PokemonDetail = (props) =>{
                 const propsid = props.id
                 const result = await pokemonService.get(props.id);
                 const { data } = await result;
-                console.log('data',data)
                 setData(data);
               } catch (err) {
                 setErr(err.message);

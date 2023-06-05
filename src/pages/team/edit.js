@@ -51,7 +51,7 @@ export async function getData(id){
 }
 
 export async function savePokemon(result){
-    console.log('save', result.results[0])
+
     pokemonService.create(result.results[0])
     .then(response => {
         console.log('response.data', response.data);
@@ -76,12 +76,10 @@ const PokemonEdit = () =>{
         const fetchData = async () => {
 
             try {
-              console.log('***++++++++++++++',location.pathname);
               const firstPath = location.pathname.split('/')[1];
-              console.log('firstPath',firstPath);
                 const result = await pokemonService.get(location.pathname.split('/')[1]);
                 const { data } = await result;
-                console.log('data',data)
+                console.log(data)
                 setData(data);
                 setTeamname(data[0].description)
               } catch (err) {
@@ -104,7 +102,7 @@ const PokemonEdit = () =>{
         setIsLoading(true);
 
         try {
-            const result = await getData(id);  ;//await response.json();
+            const result = await getData(location.pathname.split('/')[1]);  ;//await response.json();
             
            //await setData(result);
            savePokemon(result)
@@ -118,7 +116,7 @@ const PokemonEdit = () =>{
 
     const onRemove = async (e) =>{
         try {
-           const result = pokemonService.delete(id);
+           const result = pokemonService.delete(location.pathname.split('/')[1]);
         } catch (err) {
             setErr("err",err.message);
         } finally {
@@ -149,7 +147,7 @@ const PokemonEdit = () =>{
                         </div>
                         <div>
                             <span className='text-gray-600'>Name:</span>
-                            <h2 className='text-gray-800'>{pokemon.pName}</h2>
+                            <h2 className='text-gray-800'>{pokemon.name}</h2>
                         </div>
                         <div className="hidden">
                             <input className='w-full' onChange={onChangeTitle} value={pokemon.description}></input>
@@ -163,7 +161,7 @@ const PokemonEdit = () =>{
                             <h2 className='text-gray-800'>{pokemon.types}</h2>
                         </div>
                     </div>
-                    <div className="border-2 border-solid border-black w-40 content-center items-center justify-center rounded-3xl" onClick={() => onRemove(pokemon.rowid)}>REMOVE</div>
+                    <div className="border-2 border-solid border-black w-40 content-center items-center justify-center rounded-3xl px-4" onClick={() => onRemove(pokemon.rowid)}>REMOVE</div>
                 </div>
               );
             })}

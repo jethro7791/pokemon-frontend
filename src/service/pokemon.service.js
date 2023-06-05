@@ -13,10 +13,6 @@ class PokemonDataService {
     return http.post("/pokemons", data);
   }
 
-  createChild(id, data) {
-    return http.post(`/pokemons/${id}`, data);
-  }
-
   update(id, data) {
     return http.put(`/pokemons/${id}`, data);
   }
@@ -27,10 +23,6 @@ class PokemonDataService {
 
   deleteAll() {
     return http.delete(`/pokemons`);
-  }
-
-  findByTitle(title) {
-    return http.get(`/pokemons?title=${title}`);
   }
 
 }

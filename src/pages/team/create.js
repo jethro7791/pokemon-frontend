@@ -79,23 +79,15 @@ const PokemonSel = () => {
             pTeamname: teamname
         }));
 
-        // setNewData(result);
-        console.log('result',result[0]);
-
         pokemonService.create(result[0])
         .then(response => {
-            console.log(response.data);
-            window.location.href = './edit'
+            navigate('/list')
+            //window.location.href = './edit'
         })
         .catch(e => {
             console.log(e);
         });
     }
-
-    const onRemove = ()=>{
-
-    }
-  console.log('data',data);
 
   return (
     <div>
@@ -112,9 +104,7 @@ const PokemonSel = () => {
         </div>
         
       <div className='border-2 border-gray-600 border-solid bg-white rounded-xl p-1 min-h-[250px]'>  
-        <div className='relative border-2 border-solid' onClick={e => onRemove()}>
-          <span className='absolute right-1 top-0 text-base'>REMOVE</span>
-        </div>
+
         {isLoading && <h2>Loading...</h2>}
         {data.results.map(pokemon => {
           return (
