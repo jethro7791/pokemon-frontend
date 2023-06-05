@@ -91,7 +91,7 @@ const PokemonSel = () => {
 
   return (
     <div>
-      <div className='content-goback w-40 pl-16 pt-3' onClick={() => navigate('/')}></div>
+      <div className='content-goback w-40 pl-16 pt-3 cursor-pointer' onClick={() => navigate('/')}></div>
 
       <div className='p-16 font-roboto text-3xl'>
         {err && <h2>{err}</h2>}
@@ -100,7 +100,7 @@ const PokemonSel = () => {
           <input className='w-full' onChange={onChangeTitle} value={teamname}></input>
         </div>
         <div className='py-5'>
-          <button className="bg-yellow-100 px-4 h-14 rounded-3xl" onClick={handleClick}>Gotta Catch 'Em All</button>
+          <button className="bg-yellow-100 px-4 h-14 rounded-3xl cursor-pointer" onClick={handleClick}>Gotta Catch 'Em All</button>
         </div>
         
       <div className='border-2 border-gray-600 border-solid bg-white rounded-xl p-1 min-h-[250px]'>  
@@ -147,7 +147,7 @@ const PokemonSel = () => {
         })}
         </div>
         <div className='py-5'>
-          <button className="bg-yellow-100 px-4 h-14 rounded-3xl text-3xl" onClick={e => onSubmit()} >SAVE</button>
+          <button className="bg-yellow-100 px-4 h-14 rounded-3xl text-3xl cursor-pointer" onClick={e => onSubmit()} >SAVE</button>
         </div>
       </div>
     </div>

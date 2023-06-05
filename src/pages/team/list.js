@@ -33,27 +33,34 @@ const PokemonList = () =>{
           .catch(console.error);
 
           const getSingleCacheData = async (cacheName, url) => {
+            try{
+              if (typeof caches === 'undefined') return false;
 
-            if (typeof caches === 'undefined') return false;
+              const cacheStorage = await caches.open(cacheName);
 
-            const cacheStorage = await caches.open(cacheName);
+              const cachedResponse = await cacheStorage.match(url);
 
-            const cachedResponse = await cacheStorage.match(url);
+              console.log('resp',cachedResponse)
 
-            console.log('resp',cachedResponse)
+              // If no cache exists
+              if (!cachedResponse || !cachedResponse.ok) {
 
-            // If no cache exists
-            if (!cachedResponse || !cachedResponse.ok) {
-
-              setFilterby('Fetched failed!')
+                setFilterby('')
+                return;
+              }
+            
+              return cachedResponse.json().then((item) => {
+                setFilterby(item)
+              });
             }
-          
-            return cachedResponse.json().then((item) => {
-              setFilterby(item)
-            });
+            catch(err){
+              console.log('cache err',err.description)
+              setFilterby('')
+                return;
+            }
           };
 
-          getSingleCacheData('cacheFilter','http://localhost:3000');
+          getSingleCacheData('cacheFilter','http://localhost:3001');
       }, [])
     
       const onUpdate = (i) =>{
@@ -67,14 +74,14 @@ const PokemonList = () =>{
         if ('caches' in window) {
           // Opening given cache and putting our data into it
           caches.open('cacheFilter').then((cache) => {
-            cache.put('http://localhost:3000', response);
+            cache.put('http://localhost:3001', response);
           });
         }
       }
 
       return (
         <div>
-          <div className='content-goback w-40 pl-16 pt-3' onClick={() => navigate('/')}></div>
+          <div className='content-goback w-40 pl-16 pt-3 cursor-pointer' onClick={() => navigate('/')}></div>
           <div className="flex justify-start pl-16 pt-3 font-roboto text-xl">
             <span className='pr-2'>Filter by Types:</span>
             <input className='w-[400px]' onChange={onChangeFilter}  value={filterby}></input>
@@ -91,7 +98,7 @@ const PokemonList = () =>{
             .map((pokemon) => {
               return (
 
-                <div key={pokemon.id} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-1 h-[250px] mb-2' onClick={e => onUpdate(pokemon.id)}>                       
+                <div key={pokemon.id} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-1 h-[250px] mb-2 cursor-pointer' onClick={e => onUpdate(pokemon.id)}>                       
                     <div className="flex justify-start px-8 gap-5">
                         <div>
                             <span className='text-3xl text-gray-600'>Team:</span>

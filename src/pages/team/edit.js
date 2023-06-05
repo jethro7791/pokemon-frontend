@@ -116,18 +116,18 @@ const PokemonEdit = () =>{
 
     const onRemove = async (e) =>{
         try {
-           const result = pokemonService.delete(location.pathname.split('/')[1]);
+
+           await pokemonService.delete(e);
         } catch (err) {
             setErr("err",err.message);
         } finally {
-            setIsLoading(false);
             window.location.reload(false)
         }
         
     }
       return (
         <div>
-          <div className='content-goback w-40 pl-16 pt-3'  onClick={() => navigate('/list')}></div>
+          <div className='content-goback w-40 pl-16 pt-3 cursor-pointer'  onClick={() => navigate('/list')}></div>
     
           <div className='p-16 font-roboto text-3xl'>
             {err && <h2>{err}</h2>}
@@ -136,11 +136,11 @@ const PokemonEdit = () =>{
                 <input className='w-full' onChange={onChangeTitle} value={teamname}></input>
             </div>
             <div className='py-5'>
-                <button className="bg-yellow-100 px-4 h-14 rounded-3xl" onClick={handleClick}>Gotta Catch 'Em All</button>
+                <button className="bg-yellow-100 px-4 h-14 rounded-3xl cursor-pointer" onClick={handleClick}>Gotta Catch 'Em All</button>
             </div>
             {data.map(pokemon => {
               return (
-                <div key={pokemon.id} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-5 h-[200px] mb-2' >                       
+                <div key={pokemon.rowid} className='border-2 border-gray-600 border-solid bg-white rounded-xl p-5 h-[200px] mb-2' >                       
                     <div className="flex justify-between px-8">
                         <div className="flex justify-start">
                             <img className='w-32' src={pokemon.image} />
@@ -161,7 +161,7 @@ const PokemonEdit = () =>{
                             <h2 className='text-gray-800'>{pokemon.types}</h2>
                         </div>
                     </div>
-                    <div className="border-2 border-solid border-black w-40 content-center items-center justify-center rounded-3xl px-4" onClick={() => onRemove(pokemon.rowid)}>REMOVE</div>
+                    <div className="border-2 border-solid border-black w-40 content-center items-center justify-center rounded-3xl px-4 cursor-pointer" onClick={() => onRemove(pokemon.rowid)}>REMOVE</div>
                 </div>
               );
             })}

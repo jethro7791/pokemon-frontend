@@ -8,7 +8,7 @@ import css from '../../css/globals.css';
 const Home = () => {
   return (
     <div className="grid h-screen place-items-center">
-        <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-4">WELCOME TO POKEMON TOURNAMENT
             <button className='bg-yellow-100 w-52 h-20 rounded-3xl'>
             <Link to="/create">
                 <span className='text-3xl font-roboto'>Create Team</span>
